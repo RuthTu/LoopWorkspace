@@ -20,14 +20,25 @@ echo " /////////// WARNING ///////////"
 echo
 echo " This deletes the xclocs, xliff_in, xliff_out folders"
 echo " This deletes the file, ${MESSAGE_FILE}, with the lokalise download timestamp"
+echo " This restores all submodules to their current branch (reset, clean)"
 
 continue_or_quit ${0}
 
 rm -rf xclocs
 rm -rf xliff_in
 rm -rf xliff_out
-rm "${MESSAGE_FILE}"
+rm -f "${MESSAGE_FILE}"
+
+for project in ${PROJECTS}; do
+  IFS=":" read user dir branch <<< "$project"
+  echo "Reset and clean $dir"
+  cd $dir
+  git reset --hard; git clean -fd;
+  cd -
+done
+
 
 section_divider
 echo "Temporary folders and ${MESSAGE_FILE} removed from LoopWorkspace"
+echo "All folders in PROJECTS reset and cleaned"
 section_divider

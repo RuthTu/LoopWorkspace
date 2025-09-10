@@ -49,5 +49,5 @@ section_divider
 echo "Done reviewing diffs by submodule"
 echo
 echo "Next step is to create/update PRs for each modified submodule by executing"
-next_script "./Script/manual_finalize_translations.sh"
+next_script "./Scripts/manual_finalize_translations.sh"
 section_divider
